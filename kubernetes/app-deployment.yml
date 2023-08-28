@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name:  chat-room
+  namespace: staging
+  labels:
+    app:  chat-room
+spec:
+  selector:
+    matchLabels:
+      app: chat-room
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app:  chat-room
+    spec:
+      containers:
+      - name:  chat-room
+        image:  nvb20/chat-app:714e8a6d08b19685d3d59bc072fc3d2eada11ea8
+        imagePullPolicy: IfNotPresent
+        resources:
+          requests:
+            cpu: 1000m
+            memory: 1000Mi
+          limits:
+            cpu: 1000m
+            memory: 1000Mi
+        ports:
+        - containerPort:  5000
+          name:  chat-room
+        volumeMounts:
+        - name: my-chat-app
+          mountPath: /etc/my-chat-app
+      volumes:
+        - name: my-chat-app
+          hostPath:
+            path: /usr/app/code
+      restartPolicy: Always

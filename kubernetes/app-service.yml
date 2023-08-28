@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: chat-room
+  namespace: staging
+spec:
+  selector:
+    app: chat-room
+  type: ClusterIP
+  sessionAffinity: None
+  sessionAffinityConfig:
+    clientIP:
+      timeoutSeconds: 10800
+  ports:
+  - name: chat-room
+    protocol: TCP
+    port: 5000
+    targetPort: 5000
+   
