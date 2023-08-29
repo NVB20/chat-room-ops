@@ -1,23 +1,23 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name:  chat-room
+  name:  app-deployment
   namespace: staging
   labels:
-    app:  chat-room
+    app:  app-deployment
 spec:
   selector:
     matchLabels:
-      app: chat-room
+      app: app-deployment
   replicas: 1
   template:
     metadata:
       labels:
-        app:  chat-room
+        app:  app-deployment
     spec:
       containers:
-      - name:  chat-room
-        image:  nvb20/chat-app:714e8a6d08b19685d3d59bc072fc3d2eada11ea8
+      - name:  app-deployment
+        image:   nvb20/custom-actions:prod
         imagePullPolicy: IfNotPresent
         resources:
           requests:
@@ -28,7 +28,7 @@ spec:
             memory: 1000Mi
         ports:
         - containerPort:  5000
-          name:  chat-room
+          name:  app-deployment
         volumeMounts:
         - name: my-chat-app
           mountPath: /etc/my-chat-app
@@ -37,3 +37,24 @@ spec:
           hostPath:
             path: /usr/app/code
       restartPolicy: Always
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-service
+  namespace: staging
+spec:
+  selector:
+    app: app-service
+  type: ClusterIP
+  sessionAffinity: None
+  sessionAffinityConfig:
+    clientIP:
+      timeoutSeconds: 10800
+  ports:
+  - name: app-service
+    protocol: TCP
+    port: 5000
+    targetPort: 5000
+   
