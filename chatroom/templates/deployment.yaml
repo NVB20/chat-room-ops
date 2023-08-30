@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name:  {{ .Values.app_deployment.name }}
+  namespace: {{ .Values.app_deployment.namespace }}
+  labels:
+    app:  {{ .Values.app_deployment.name }}
+spec:
+  selector:
+    matchLabels:
+      app: {{ .Values.app_deployment.name }}
+  replicas: {{ .Values.app_deployment.replicas }}
+  template:
+    metadata:
+      labels:
+        app:  {{ .Values.app_deployment.name }}
+    spec:
+      containers:
+      - name:  {{ .Values.app_deployment.containers.name }}
+        image:   {{ .Values.app_deployment.containers.image }}
+        imagePullPolicy: IfNotPresent
+        resources:
+          requests:
+            cpu: 1000m
+            memory: 1000Mi
+          limits:
+            cpu: 1000m
+            memory: 1000Mi
+        ports:
+        - containerPort:  {{ .Values.app_deployment.containers.containerPort }}
+          name:  {{ .Values.app_deployment.name }}
+        volumeMounts:
+        - name: my-chat-app
+          mountPath: {{ .Values.app_deployment.volumes.mountPath }}
+      volumes:
+        - name: my-chat-app
+          hostPath:
+            path: {{ .Values.app_deployment.volumes.hostPath_path }}
+      restartPolicy: {{ .Values.app_deployment.restartPolicy}}

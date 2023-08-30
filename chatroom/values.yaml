@@ -1,0 +1,18 @@
+app_deployment:
+  name: app-deployment
+  replicas: 1
+  namespace: staging
+  restartPolicy: Always
+  containers:
+    name: room-container
+    image:   nvb20/chat-app:44f41f96541f5fe79d4b8c069b575b20b90298bb
+    containerPort: 5000
+  volumes:
+    mountPath: /etc/chat_app
+    hostPath_path: /usr/app/code
+
+app_service:
+  name: app-service
+  namespace: staging
+  port: 80
+  targetPort: 5000

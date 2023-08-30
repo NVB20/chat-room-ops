@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.app_service.name }}
+  namespace: {{ .Values.app_service.namespace }}
+spec:
+  selector:
+    app: {{ .Values.app_deployment.name }}
+  type: ClusterIP
+  sessionAffinity: None
+  sessionAffinityConfig:
+    clientIP:
+      timeoutSeconds: 10800
+  ports:
+  - name: {{ .Values.app_service.name }}
+    protocol: TCP
+    port: {{ .Values.app_service.port }}
+    targetPort: {{ .Values.app_service.targetPort }}
