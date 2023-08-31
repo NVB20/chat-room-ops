@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.mongodb_deployment.name }}
+  namespace: {{ .Values.mongodb_deployment.namespace }}
+  labels:
+    app: {{ .Values.mongodb_deployment.app_labels }}
+spec:
+  replicas: {{ .Values.mongodb_deployment.replicas }}
+  selector:
+    matchLabels:
+      app: {{ .Values.mongodb_deployment.app_labels }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.mongodb_deployment.app_labels }}
+    spec:
+      containers:
+      - name: {{ .Values.mongodb_deployment.containers.name }}
+        image: {{ .Values.mongodb_deployment.containers.image }}
+        ports:
+        - containerPort: {{ .Values.mongodb_deployment.containers.port }}
+        volumeMounts:
+        - mountPath: "/pvc/claim"
+          name: {{ .Values.mongodb_deployment.volumes.name}}
+      volumes:
+      - name: {{ .Values.mongodb_deployment.volumes.name}}
+        persistentVolumeClaim:
+          claimName: mongo-pv-claim

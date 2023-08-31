@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: {{ .Values.persistent_volume.name }}
+  namespace: {{ .Values.mongodb_deployment.namespace }}
+  labels:
+    type: local
+spec:
+  storageClassName: {{ .Values.persistent_volume.storageClassName }}
+  capacity:
+    storage: {{ .Values.persistent_volume.storage}}
+  accessModes:
+    - {{ .Values.persistent_volume.accessModes}}
+  hostPath:
+    path: /mnt/data

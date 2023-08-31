@@ -1,0 +1,30 @@
+mongodb_deployment:
+  name: mongodb-deployment
+  namespace: staging
+  replicas: 1
+  app_labels: mongodb
+  containers:
+    name: mongodb-container
+    image: mongo:7.0.1-rc0
+    port: 27017
+  volumes:
+    name: mongo-volume
+
+mongodb_service:
+  name: mongodb-service
+  ports:
+    port: 27017
+    targetPort: 27017
+
+persistent_volume:
+  name: mongo-pv-storage
+  storageClassName: standard
+  storage: 4Gi
+  accessModes: ReadWriteOnce
+
+persistent_volume_claim:
+  name: mongo-pv-claim
+  storage: 1Gi
+  accessModes: ReadWriteOnce
+  storageClassName: standard
+  

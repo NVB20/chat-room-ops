@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ .Values.persistent_volume_claim.name }}
+  namespace: {{ .Values.mongodb_deployment.namespace }}
+  labels:
+    app: {{ .Values.persistent_volume_claim.name }}
+spec:
+  storageClassName: {{ .Values.persistent_volume_claim.storageClassName }}
+  accessModes:
+  - {{ .Values.persistent_volume_claim.accessModes }}
+  resources:
+    requests:
+      storage: {{ .Values.persistent_volume_claim.storage }}
