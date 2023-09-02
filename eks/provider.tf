@@ -26,4 +26,11 @@ terraform {
   }
 
   required_version = "~> 1.3"
+
+  backend "s3" {
+    bucket = "tfstate-bucket-sep-2023"
+    key = "key/terraform.tfstate"
+    region = "us-east-1"
+  }
+  
 }
