@@ -15,23 +15,39 @@ module "eks" {
   }
 
   eks_managed_node_groups = {
-    managed_group_one = {
-      name = "node-group-2"
+    app_managed_group = {
+      name = "app-node-group"
 
       instance_types = ["t3.small"]
 
       min_size     = var.node_min_size
       max_size     = var.node_max_size
       desired_size = var.node_desired_size
+
+      subnet_ids   = module.vpc.public_subnets
+    }
+
+    db_managed_group = {
+      name = "app-node-group"
+
+      instance_types = ["t3.small"]
+
+      min_size     = var.node_min_size
+      max_size     = var.node_max_size
+      desired_size = var.node_desired_size
+
+      subnet_ids   = module.vpc.private_subnets
     }
   }
 }
 
 resource "aws_eks_addon" "ebs-csi" {
   cluster_name             = module.eks.cluster_name
+
   addon_name               = "aws-ebs-csi-driver"
   addon_version            = "v1.20.0-eksbuild.1"
   service_account_role_arn = module.irsa-ebs-csi.iam_role_arn
+
   tags = {
     "eks_addon" = "ebs-csi"
     "terraform" = "true"
