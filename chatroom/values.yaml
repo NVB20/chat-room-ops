@@ -1,6 +1,7 @@
 app_deployment:
   name: app-deployment
   replicas: 1
+  namespace: default
   restartPolicy: Always
   containers:
     name: room-container
