@@ -2,7 +2,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ .Values.mongodb_deployment.name }}
-  namespace: {{ .Values.mongodb_deployment.namespace }}
   labels:
     app: {{ .Values.mongodb_deployment.app_labels }}
 spec:

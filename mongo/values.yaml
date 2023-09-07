@@ -1,6 +1,5 @@
 mongodb_deployment:
   name: mongodb-deployment
-  namespace: staging
   replicas: 1
   app_labels: mongodb
   containers:

@@ -1,7 +1,6 @@
 app_deployment:
   name: app-deployment
   replicas: 1
-  namespace: staging
   restartPolicy: Always
   containers:
     name: room-container
@@ -13,6 +12,5 @@ app_deployment:
 
 app_service:
   name: app-service
-  namespace: staging
   port: 80
   targetPort: 5000
