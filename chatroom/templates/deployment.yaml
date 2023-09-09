@@ -29,11 +29,4 @@ spec:
         ports:
         - containerPort:  {{ .Values.app_deployment.containers.containerPort }}
           name:  {{ .Values.app_deployment.name }}
-      #   volumeMounts:
-      #   - name: my-chat-app
-      #     mountPath: {{ .Values.app_deployment.volumes.mountPath }}
-      # volumes:
-      #   - name: my-chat-app
-      #     hostPath:
-      #       path: {{ .Values.app_deployment.volumes.hostPath_path }}
-      # restartPolicy: {{ .Values.app_deployment.restartPolicy}}
+      restartPolicy: {{ .Values.app_deployment.restartPolicy}}

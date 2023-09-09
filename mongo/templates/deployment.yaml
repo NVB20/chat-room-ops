@@ -20,10 +20,10 @@ spec:
         image: {{ .Values.mongodb_deployment.containers.image }}
         ports:
         - containerPort: {{ .Values.mongodb_deployment.containers.port }}
-        volumeMounts:
-        - mountPath: "/pvc/claim"
-          name: {{ .Values.mongodb_deployment.volumes.name}}
-      volumes:
-      - name: {{ .Values.mongodb_deployment.volumes.name}}
-        persistentVolumeClaim:
-          claimName: mongo-pv-claim
+      #   volumeMounts:
+      #   - mountPath: "/pvc/claim"
+      #     name: {{ .Values.mongodb_deployment.volumes.name}}
+      # volumes:
+      # - name: {{ .Values.mongodb_deployment.volumes.name}}
+      #   persistentVolumeClaim:
+      #     claimName: mongo-pv-claim
