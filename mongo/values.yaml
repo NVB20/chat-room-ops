@@ -19,7 +19,7 @@ mongodb_service:
 persistent_volume:
   name: mongo-pv-storage
   storageClassName: standard
-  storage: 4Gi
+  storage: 2Gi
   accessModes: ReadWriteOnce
 
 persistent_volume_claim:
