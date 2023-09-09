@@ -18,7 +18,7 @@ mongodb_service:
 
 persistent_volume:
   name: mongo-pv-storage
-  storageClassName: standard
+  storageClassName: standard-rwo
   storage: 2Gi
   accessModes: ReadWriteOnce
 
@@ -26,5 +26,5 @@ persistent_volume_claim:
   name: mongo-pv-claim
   storage: 1Gi
   accessModes: ReadWriteOnce
-  storageClassName: standard
+  storageClassName: standard-rwo
   
