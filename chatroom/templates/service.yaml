@@ -5,7 +5,7 @@ metadata:
   namespace: {{ .Values.app_deployment.namespace }}
 spec:
   selector:
-    app: {{ .Values.app_deployment.name }}
+    app: chatroom
   type: ClusterIP
   sessionAffinity: None
   sessionAffinityConfig:

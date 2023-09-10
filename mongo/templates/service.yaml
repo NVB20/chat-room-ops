@@ -5,8 +5,8 @@ metadata:
   namespace: {{ .Values.mongodb_deployment.namespace }}
 spec:
   selector:
-    app: {{ .Values.mongodb_deployment.app_labels }}
+    app: mongodb
   ports:
     - protocol: TCP
-      port: {{ .Values.mongodb_service.ports.port}}
+      port: {{ .Values.mongodb_service.ports.port }}
       targetPort: {{ .Values.mongodb_service.ports.targetPort }}

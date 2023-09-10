@@ -1,32 +1,24 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name:  {{ .Values.app_deployment.name }}
+  name: {{ .Values.app_deployment.name }}
   namespace: {{ .Values.app_deployment.namespace }}
   labels:
-    app:  {{ .Values.app_deployment.name }}
+    app: chatroom
 spec:
+  replicas: {{ .Values.app_deployment.replicas }}
   selector:
     matchLabels:
-      app: {{ .Values.app_deployment.name }}
-  replicas: {{ .Values.app_deployment.replicas }}
+      app: chatroom
   template:
     metadata:
       labels:
-        app:  {{ .Values.app_deployment.name }}
+        app: chatroom
     spec:
       containers:
-      - name:  {{ .Values.app_deployment.containers.name }}
-        image:   {{ .Values.app_deployment.containers.image }}
+      - name: {{ .Values.app_deployment.containers.name }}
+        image: {{ .Values.app_deployment.containers.image }}
         imagePullPolicy: IfNotPresent
-        resources:
-          requests:
-            cpu: 300m
-            memory: 300Mi
-          limits:
-            cpu: 700m
-            memory: 700Mi
         ports:
-        - containerPort:  {{ .Values.app_deployment.containers.containerPort }}
-          name:  {{ .Values.app_deployment.name }}
-      restartPolicy: {{ .Values.app_deployment.restartPolicy}}
+        - containerPort: {{ .Values.app_deployment.containers.containerPort }}
+      restartPolicy: Always
