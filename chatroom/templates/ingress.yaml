@@ -1,18 +1,14 @@
-# apiVersion: networking.k8s.io/v1
-# kind: Ingress
-# metadata:
-#   name: chatops-ingress
-#   namespace: {{ .Values.app_deployment.namespace }}
-# spec:
-#   ingressClassName: nginx
-#   rules:
-#   - host: chatroom.com
-#     http:
-#       paths:
-#       - path: /
-#         pathType: Prefix
-#         backend:
-#           service:
-#             name: {{ .Values.app_service.name }}
-#             port:
-#               number: 80
+---
+apiVersion: "networking.k8s.io/v1"
+kind: "Ingress"
+metadata:
+  name: "chat-ingress"
+  namespace: {{ .Values.app_deployment.namespace }}
+spec:
+  defaultBackend:
+    service:
+      name: {{ .Values.app_service.name }}
+      port:
+        number: {{ .Values.app_service.port }}
+status:
+  loadBalancer: {}
