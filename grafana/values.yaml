@@ -1,4 +1,4 @@
 grafana_deployment:
-  namespace: my-grafana
+  namespace: grafana
   containers:
     image: grafana/grafana:10.0.5
