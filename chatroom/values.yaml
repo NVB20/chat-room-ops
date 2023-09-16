@@ -1,10 +1,10 @@
 app_deployment:
   name: app-deployment
-  replicas: 1
+  replicas: 2
   namespace: default
   containers:
     name: room-container
-    image:   nvb20/chat-app:5f6as4df45sadffsd54affadsf54s4df45sadffsd54afs4df45sadfs4dsadf
+    image: nvb20/chat-app:tag
     containerPort: 5000
   
 
