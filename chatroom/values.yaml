@@ -4,7 +4,7 @@ app_deployment:
   namespace: default
   containers:
     name: room-container
-    image: nvb20/chat-app:tag
+    image: nvb20/chat-app:testings
     containerPort: 5000
   
 
