@@ -4,7 +4,7 @@ app_deployment:
   namespace: default
   containers:
     name: room-container
-    image: nvb20/chat-app:discord_notification
+    image: nvb20/chat-app:Merge_pull_request_#4_from_NVB20/feature
     containerPort: 5000
   
 
